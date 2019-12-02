@@ -1,0 +1,109 @@
+
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<h1>Cadastro de Pessoas</h1>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-md-6">
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Nova Pessoa</button>
+			</div>
+			<div class="col-md-6">
+				<input class="form-control" ng-model="pesquisar">
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-md-12">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Nome</th>
+							<th>Cpf</th>
+							<th>Email</th>
+							<th>Ações</th>
+						</tr>	
+					</thead>
+					<tbody>
+						<tr ng-repeat="l in listaPessoas track by $index">
+							<td>{{l.nome}}</td>
+							<td>{{l.cpf}}</td>
+							<td>{{l.email}}</td>
+							<td><button data-toggle="modal" data-target="#myModal2" ng-click="editmodal(l)" class="btn btn-info">Editar</button> 
+								<button class="btn btn-danger" ng-click="delete(l.id)">Excluir</button></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+ 
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">Cadastro de Pessoa</h4>
+				</div>
+				<div class="modal-body">
+					<form name='pessoas'>
+						<div class="form-group">
+							<label>Nome:</label>
+							<input type="text" class="form-control" ng-model="pessoa.nome" required>
+						</div>
+
+						<div class="form-group">
+								<label>CPF:</label>
+								<input type="cpf" class="form-control" ng-model="pessoa.cpf" required>
+							</div>
+
+						<div class="form-group">
+							<label>E-mail:</label>
+							<input type="email" class="form-control" ng-model="pessoa.email" required>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="pessoa = {}">Cancelar</button>
+					<button type="button" class="btn btn-primary" data-dismiss="modal" ng-disabled="pessoas.$invalid" ng-click="salvar()">Salvar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel">Edição de Pessoa</h4>
+					</div>
+					<div class="modal-body">
+						<form name='pessoas2'>
+							<div class="form-group">
+								<label>Nome:</label>
+								<input type="text" class="form-control" ng-model="editpessoa.nome" required>
+							</div>
+	
+							<div class="form-group">
+									<label>CPF:</label>
+									<input type="cpf" class="form-control" ng-model="editpessoa.cpf" required>
+								</div>
+	
+							<div class="form-group">
+								<label>E-mail:</label>
+								<input type="email" class="form-control" ng-model="editpessoa.email" required>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="pessoa = {}">Cancelar</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal" ng-disabled="pessoas2.$invalid" ng-click="editar(editpessoa, editpessoa.id)">Alterar</button>
+					</div>
+				</div>
+			</div>
+		</div>
